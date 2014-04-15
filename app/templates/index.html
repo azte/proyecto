@@ -39,6 +39,8 @@
 		<p>Es importante registrarte porque LOL!</p>
 		<a id="registro" href="#">Registrate acá</a>
 		<p id="mensaje_registro">En serio, registrate por favor</p>
+		{% else %}
+			Hola {{request.user}}
 		{% endif %}
 	</aside>
 	<section id="contenido">
@@ -61,9 +63,9 @@
 				<a class="guardar_item" href="#"></a>
 			</p>
 			<p class="votacion">
-				<a class="up" href="{# url "plus" enlace.pk #}"></a>
+				<a class="up" href="{% url "plus" enlace.pk %}"></a>
 				{{enlace.votos}}
-				<a class="down" href="{# url "minus" enlace.pk #}"></a>
+				<a class="down" href="{% url "minus" enlace.pk %}"></a>
 			</p>
 		</article>
 		{% endfor %}
