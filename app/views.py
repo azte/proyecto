@@ -17,6 +17,8 @@ def add(request):
 	if request.method == "POST":
 		form = EnlaceForm(request.POST)
 		if form.is_valid():
+			enlace = form.save(commit = False)
+			enlace.usuario = request.user
 			enlace.save()
 			return HttpResponseRedirect("/")
 	else:
@@ -26,7 +28,7 @@ def add(request):
 
 def home(request):
 	categorias = Categoria.objects.all()
-	enlaces = Enlace.objects.all()
+	enlaces = Enlace.objects.order_by("-votos").all()
 	template = "index.html"
 	#diccionario = {"categorias":categorias,"enlaces":enlaces} En lugar de locals
 	return render_to_response(template,locals())
